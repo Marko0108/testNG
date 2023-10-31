@@ -1,0 +1,85 @@
+TestNG
+Class1
+
+TestNG is a Fm that allows us to build test cases.
+
+All the test cases are written down under the annotation :
+@Test
+
+
+Testing login functionality
+1 go to the website
+2 enter username and password
+3 click login button
+4 verify that you’re logged in
+
+Testing login functionality
+1 go to the website
+2 enter incorrect username and password
+3 click login button
+4 verify that you’re not logged in
+
+@BeforeMethod —> runs before every @Test
+@AfterMethod —> runs after every @Test
+
+DEPENDS ON
+Depends on the method that is dependent on a parent method will only execute if the parent method passes.
+
+ENABLE/DISABLE
+Enable = false —> once it’s set to that, the test will be ignored
+
+
+PRIORITY
+Tests are executed in alphabetical order, but yo can prioritize them by adding (priority1,2,3) after @Test,
+The highest priority is 0!!! You don’t mention it, it’s by default.
+
+ASSERTIONS
+
+Hard assertions - if an assertion failed, testNG will quit the test case an mark it as failed, it will not proceed with the rest of the test cases:
+Assert.assertTrue() - takes a boolean value
+Assert.assertEquals(actual, expected) - takes 2 Strings
+
+SoftAssetrions - if an assertion failed, testNG will not quit the test case and proceed with the rest of the test cases, until it checks all the assertions
+Declare the obj of soft assertion
+SoftAssert soft=new SoftAssert();
+Write down an assertions:
+ soft.AssertTrue()
+ soft.AssertEquals()
+Once assertions are written in the end - soft.AssertAll() the purpose is to compile all the assertions
+
+DATA PROVIDER
+@DataProvider (name=“credentials”)
+1.Declare the data in 2D array:
+
+     public obj [][] data(){
+     Obj [][]loginData={
+    {“Admin”, “123”, “Invalid Credentials”},
+     {“admin”, “Hum@nhrms123”, “valid cr”}
+     {“ ”, “123”, “password can’t be empty”}
+};
+     return loginData;
+}
+
+
+@Test(dataProvider =“ credentials”)
+Public void login (String username, String password, String message){
+}
+
+
+Declare the data in 2 d array
+2.@dataProvider (name=“”)
+@Test(dataProvider =“ name”)
+  Public void testCase(String, String, String) // based on what your data is
+
+
+TESTNG xml file, works same as runner class
+
+Create testNG xml
+install plugin - plugging, marketplace, testng XML plugin
+right click on any class —> create testNG xml—>okay
+right click on project name and reload a project from disk (if the file did not appear automatically)
+go to the xml file and refactor code, option+command+L
+
+
+When we’re running through groups testNG will not execute before and after methods,
+unless you add @BeforeMethod(alwaysRun= true).
